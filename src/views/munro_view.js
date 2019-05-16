@@ -26,7 +26,6 @@ MunroView.prototype.createNameHeading = function(){
     name.classList.add('munro-name');
     name.textContent = this.munro.name;
     return name
-    // this.munroContainer.appendChild(name);
 }
 
 MunroView.prototype.createMunroDetailsList = function(){

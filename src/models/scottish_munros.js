@@ -14,10 +14,15 @@ ScottishMunros.prototype.getData = function () {
             this.munros = data;
             PubSub.publish('Munros:munro-data-ready', this.munros)
             return data
-            // console.log(data);
         });
         
         
+}
+
+ScottishMunros.prototype.getRegionNames = function(munros){
+    return munros
+    .map(munro => munro.region)
+    .filter((region, index, regions) => regions.indexOf(region)=== index)
 }
 
 module.exports = ScottishMunros;
