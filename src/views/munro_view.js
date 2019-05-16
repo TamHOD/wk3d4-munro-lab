@@ -6,16 +6,16 @@ const MunroView = function(container, munro) {
 MunroView.prototype.render = function(){
     const munroContainer = document.createElement('div');
     munroContainer.classList.add('munro');
-    console.log(munroContainer);
+    // console.log(munroContainer);
     
 
     const name = this.createNameHeading();
     munroContainer.appendChild(name);
-    console.log(name);
+    // console.log(name);
 
     const munroDetailsList = this.createMunroDetailsList();
     munroContainer.appendChild(munroDetailsList);
-    console.log(munroDetailsList);
+    // console.log(munroDetailsList);
 
     this.munrosContainer.appendChild(munroContainer);
 }

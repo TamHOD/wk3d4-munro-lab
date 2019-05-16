@@ -13,16 +13,41 @@ ScottishMunros.prototype.getData = function () {
         .then((data) => {
             this.munros = data;
             PubSub.publish('Munros:munro-data-ready', this.munros)
-            return data
+            
+
+            const regionNames = this.getRegionNames(this.munros);
+            PubSub.publish('Regions:region-names-ready', regionNames)
+            console.log(regionNames);
+
+            PubSub.subscribe('SelectView:change', (event) => {
+                const region = event.detail
+                console.log(region);
+                
+                const munrosByRegion = this.filterByRegion(region, data)
+                console.log(munrosByRegion);
+                
+                PubSub.publish('Munros:munros-by-region', munrosByRegion)
+            })
+
         });
-        
-        
 }
 
 ScottishMunros.prototype.getRegionNames = function(munros){
     return munros
     .map(munro => munro.region)
     .filter((region, index, regions) => regions.indexOf(region)=== index)
+}
+
+ScottishMunros.prototype.filterByRegion = function (region, munros) {
+    return munros.filter((munro) => {
+        // console.log(region);
+        // console.log(munro);
+        
+        
+        if (munro.region == region) {
+            return munro 
+        }  
+    })
 }
 
 module.exports = ScottishMunros;
